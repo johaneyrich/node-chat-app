@@ -8,10 +8,10 @@ socket.on('connect', function() {
   //   text: "hey hvad sker der?"
   // });
 
-  socket.emit('createMessage', {
-    form: 'theSender@sender.com',
-    text: "Well we're playing at 5pm"
-  });
+  // socket.emit('createMessage', {
+  //   form: 'theSender@sender.com',
+  //   text: "Well we're playing at 5pm"
+  // });
 
 });
 

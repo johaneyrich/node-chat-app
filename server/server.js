@@ -23,11 +23,12 @@ io.on('connection', (socket) => {
   //   createdAt: 123
   // });
 
-  socket.emit('newMessage', {
-    from: 'hero@one.com',
-    text: 'dette er en text',
-    createdAt: 123
-  });
+  // //sokcet.emit emitter til en forbindelse
+  // socket.emit('newMessage', {
+  //   from: 'hero@one.com',
+  //   text: 'dette er en text',
+  //   createdAt: 123
+  // });
 
   // socket.on('createEmail', (newEmail) => {
   //   console.log('createEmail', newEmail);
@@ -35,6 +36,12 @@ io.on('connection', (socket) => {
 
   socket.on('createMessage', (messageNew) => {
     console.log('createMessage', messageNew);
+    //io.emit sender til alle åbne forbindelser
+    io.emit('newMessage', {
+      from: messageNew.from,
+      text: messageNew.text,
+      createdAt: new Date().getTime()
+    });
   });
 
 
