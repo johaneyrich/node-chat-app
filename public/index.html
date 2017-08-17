@@ -2,11 +2,63 @@
 
 <head>
   <meta charset="utf-8">
+
+  <script>
+//
+// DETTE SCRIPT SKAL SLETTES!!!!
+//
+  function gotoBottom(id){
+  //  var element = document.getElementById(id);
+  //  element.scrollTop = element.scrollHeight - element.clientHeight;
+  //  element.scrollTop =  element.clientHeight - element.scrollHeight;
+  // element.scrollTop = element.clientHeight;
+  // console.log(el);
+   //window.scrollTop
+   var objDiv = document.getElementById(id);
+   objDiv.scrollTop = objDiv.scrollHeight;
+ };
+
+  function myFunctionONE() {
+    // chat.innerHTML = document.getElementById("myForm").elements[0].value;
+    var x = {};
+    x.from = document.getElementById("myForm").elements['from'].value;
+    x.text = document.getElementById("myForm").elements[1].value;
+    console.log(x);
+    socket.emit('createMessage',{
+      from: x.from,
+      text: x.text
+    });
+    // gotoBottom('chat');
+  };
+
+  </script>
+  <style>
+  #chat {
+    background-color: #ddffff;
+    height:400px;
+    overflow: auto;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  </style>
 </head>
 <body>
   <h2> The Chat</h2>
-  <br/><br/>
-  <div id="chat"></div>
+  <br/>
+
+  <p>Enter names in the fields, then click "Submit" to submit the form:</p>
+
+  <form id="myForm">
+    First name: <input type="text" name="from" value="Donald"><br>
+    <textarea rows="4" cols="50" name="text" form="myForm">Enter text here...</textarea>
+
+  </form>
+  <button onclick="myFunctionONE()">send</button>
+
+
+  <br/>
+  <div id="chat" class="chat"></div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/js/index.js"></script>
 </body>

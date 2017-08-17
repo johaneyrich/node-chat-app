@@ -3,6 +3,7 @@ require('./config/config.js');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const {generateMessage} = require('./utils/message.js');
 
 const path = require('path');
 const publicPath = path.join(__dirname + '/../public');
@@ -34,26 +35,21 @@ io.on('connection', (socket) => {
   //   console.log('createEmail', newEmail);
   // });
 
-  socket.emit('newMessage', {
-    from: 'Admin',
-    text: 'Wellcome to the chat',
-    createdAt: new Date().getTime()
-  });
+  // socket.emit('newMessage', {
+  //   from: 'Admin',
+  //   text: 'Wellcome to the chat',
+  //   createdAt: new Date().getTime()
+  // });
 
-  socket.broadcast.emit('newMessage', {
-    from: 'Admin',
-    text: 'A new user joined',
-    createdAt: new Date().getTime()
-  });
+  socket.emit('newMessage', generateMessage('Admin','Wellcome to the chat app'));
+
+
+  socket.broadcast.emit('newMessage', generateMessage('Admin','A new user joined'));
 
   socket.on('createMessage', (messageNew) => {
     console.log('createMessage', messageNew);
     // io.emit sender til alle åbne forbindelser
-    io.emit('newMessage', {
-      from: messageNew.from,
-      text: messageNew.text,
-      createdAt: new Date().getTime()
-    });
+    io.emit('newMessage', generateMessage(messageNew.from, messageNew.text));
 
     //socket.broadcast.emit sender til alle på nær afsender
     // socket.broadcast.emit('newMessage', {
