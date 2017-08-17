@@ -34,14 +34,33 @@ io.on('connection', (socket) => {
   //   console.log('createEmail', newEmail);
   // });
 
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Wellcome to the chat',
+    createdAt: new Date().getTime()
+  });
+
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'A new user joined',
+    createdAt: new Date().getTime()
+  });
+
   socket.on('createMessage', (messageNew) => {
     console.log('createMessage', messageNew);
-    //io.emit sender til alle åbne forbindelser
+    // io.emit sender til alle åbne forbindelser
     io.emit('newMessage', {
       from: messageNew.from,
       text: messageNew.text,
       createdAt: new Date().getTime()
     });
+
+    //socket.broadcast.emit sender til alle på nær afsender
+    // socket.broadcast.emit('newMessage', {
+    //   from: messageNew.from,
+    //   text: messageNew.text,
+    //   createdAt: new Date().getTime()
+    // });
   });
 
 

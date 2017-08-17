@@ -25,4 +25,5 @@ socket.on('disconnect', function() {
 
 socket.on('newMessage', function(message) {
   console.log('Theres a new message : \n', message);
+  chat.innerHTML += "<br/>from: "+ message.from + "<br/><hr/><br/>" + message.text+ "<br/><hr/><hr/><br/>";
 });
