@@ -1,0 +1,15 @@
+class Person {
+  constructor (name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  getUserDesciption() {
+    return `${this.name} is ${this.age} year(s) old `;
+  }
+}
+
+var me = new Person('Johan', 43);
+
+var description = me.getUserDesciption();
+console.log(description);
